@@ -1,0 +1,19 @@
+#aergia{
+  display: none;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+}
+
+.container{
+  background-color: #222;
+  min-width: 20px;
+  min-height: 20px;
+  margin: 0;
+}
+
+h1 {
+  color: #fff;
+}
