@@ -12,21 +12,46 @@ function testElementName(a){
   switch(a[0]){
     case "header1":
       var newHeader1Element = document.createElement("h1");
-      var newHeaderText = document.createTextNode(a[1]);
+      /*var newHeaderText = document.createTextNode(a[1]);
       newHeader1Element.appendChild(newHeaderText);
       newHeader1Element.id = a[2];
-      testNest(a, newHeader1Element);
-      //document.body.appendChild(newHeader1Element);
+      testNest(a, newHeader1Element);*/
+      testAttribute(a, newHeader1Element);
       break;
     case "container":
       var newContainerElement = document.createElement("div");
-      newContainerElement.id = a[1];
+      /*newContainerElement.id = a[1];
       newContainerElement.classList.add("container");
-      testNest(a, newContainerElement);
+      testNest(a, newContainerElement);*/
+      testAttribute(a, newContainerElement);
   }
 }
 
-function testNest(a, b){
+function testAttribute(a, b){
+  for(i = 1; i < a.length; i++){
+    var tempAttributeArray = a[i].split("-");
+    switch(tempAttributeArray[0]){
+      case "id":
+        b.id(tempAttributeArray[1]);
+        break;
+      case "class":
+        b.classList.add(tempAttributeArray[1]);
+        break;
+      case "text":
+        var tempTextNode = document.createTextNode(tempAttributeArray[1]);
+        b.appendChild(tempTextNode);
+      case "inside":
+        if(tempAttributeArray[1] == "body"){
+          document.body.appendChild(b);
+        }
+        else{
+          document.getElementById(tempAttributeArray[1]).appendChild(b);
+        }
+    }
+  }
+}
+
+/*function testNest(a, b){
   var aLastIndex = a.length - 1;
   if(a[aLastIndex] == "inside-body"){
     document.body.appendChild(b);
@@ -35,7 +60,7 @@ function testNest(a, b){
     var tempNestArray = a[aLastIndex].split("-");
     document.getElementById(tempNestArray[1]).appendChild(b);
   }
-}
+}*/
 
 //The main mechanic is now finished!
 
